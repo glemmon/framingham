@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Framingham Survival Explorer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="/static/app.css"/>
+  </head>
+  <body>
+    <header>
+      <h1>Framingham Survival Explorer</h1>
+    </header>
+    <main>
+      <section id="controls">
+        <div class="row">
+          <label>Outcome</label>
+          <select id="outcome"></select>
+          <label><input type="checkbox" id="excludePrev"> Exclude prevalent disease</label>
+          <label>PERIOD</label>
+          <select id="period">
+            <option value="">All</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+          <label>Smoking fix</label>
+          <select id="smoking_fix">
+            <option value="leave">leave</option>
+            <option value="coerce">coerce CIGPDAY=0</option>
+            <option value="drop">drop rows</option>
+          </select>
+        </div>
+        <div class="row">
+          <label>Predictors</label>
+          <select multiple id="predictors" size="8" style="min-width:280px;"></select>
+          <label>Missing</label>
+          <select id="missing">
+            <option value="drop">drop</option>
+            <option value="impute">impute</option>
+          </select>
+        </div>
+        <div class="row">
+          <button id="runKM">Run Kaplan–Meier</button>
+          <button id="runCox">Run Cox PH</button>
+          <button id="dlKM">Download KM Plot</button>
+          <button id="dlCox">Download Cox Plot</button>
+        </div>
+      </section>
+      <section id="results">
+        <div id="status"></div>
+        <div class="tabs">
+          <button class="tablink active" data-tab="km">KM Curve</button>
+          <button class="tablink" data-tab="cox">Cox Results</button>
+          <button class="tablink" data-tab="summary">Data Summary</button>
+        </div>
+        <div id="tab-km" class="tab active">
+          <img id="kmPlot" alt="KM Plot"/>
+          <pre id="kmJson" class="json"></pre>
+        </div>
+        <div id="tab-cox" class="tab">
+          <img id="coxPlot" alt="Cox Plot"/>
+          <table id="coxTable"></table>
+          <pre id="coxJson" class="json"></pre>
+        </div>
+        <div id="tab-summary" class="tab">
+          <pre id="summaryJson" class="json"></pre>
+        </div>
+      </section>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
